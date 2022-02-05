@@ -2,31 +2,6 @@ import React from 'react';
 
 class CartItem extends React.Component {
 
-    increaseQuantity = () => {
-        // setState from 1
-        // this.setState( {
-        //     qty: this.state.qty + 1
-        // })
-        // setState form 2 - if prevState required use this
-        this.setState( (prevState) => {
-            return {
-                qty: prevState.qty + 1
-            }
-        })
-    }
-
-    deccreaseQuantity = () => {
-        const { qty } = this.state;
-        if(qty === 0) {
-            return
-        }
-        this.setState( (prevState) => {
-            return {
-                qty: prevState.qty - 1
-            }
-        })
-    }
-
     render() {
         const {price, title, qty} = this.props.product;
         return (
@@ -44,19 +19,20 @@ class CartItem extends React.Component {
                             alt="" 
                             className='action-icons' 
                             src="https://cdn-icons-png.flaticon.com/512/992/992651.png"
-                            onClick={ this.increaseQuantity }>
-                        </img>
+                            onClick={ () => this.props.onIncreaseQuantity(this.props.product) } 
+                        />
                         <img 
                             alt="" 
                             className='action-icons' 
                             src="https://cdn-icons-png.flaticon.com/512/66/66889.png"
-                            onClick={ this.deccreaseQuantity }>
-                        </img>
+                            onClick={ () => this.props.onDecreaseQuantity(this.props.product) } 
+                        />
                         <img 
                             alt="" 
                             className='action-icons' 
-                            src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png">
-                        </img>
+                            src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                            onClick={ () => this.props.onDeleteProduct(this.props.product.id)}
+                        />
                     </div>
                 </div>
             </div>
