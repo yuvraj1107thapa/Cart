@@ -113,7 +113,7 @@ class App extends React.Component {
       // this.setState({
       //     products: products
       // })
-      
+
       const docRef = this.db.collection('products').doc(products[index].id);
       docRef
       .update({
@@ -132,8 +132,18 @@ class App extends React.Component {
       const items = products.filter( (item) => {
           return item.id !== id
       })
-      this.setState({
-          products: items
+      // this.setState({
+      //     products: items
+      // })
+      const docRef = this.db.collection('products').doc(id);
+
+      docRef
+      .delete()
+      .then( () => {
+        console.log('Deleted successfully')
+      })
+      .catch( (error) => {
+        console.log("Error : ", error);
       })
   }
 
